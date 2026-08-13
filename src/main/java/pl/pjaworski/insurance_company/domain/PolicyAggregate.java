@@ -8,6 +8,6 @@ import java.util.UUID;
 public record PolicyAggregate(UUID id) implements StateProjector<PolicyAggregate> {
     @Override
     public PolicyAggregate apply(PolicyAggregate state, PolicyIssuedEvent event) {
-        return new PolicyAggregate(event.policyId());
+        return new PolicyAggregate(event.aggregateId());
     }
 }

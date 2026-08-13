@@ -5,7 +5,7 @@ import pl.pjaworski.insurance_company.eventstream.DomainEvent;
 import java.util.UUID;
 
 public record PolicyIssuedEvent(
-        UUID policyId,
+        UUID aggregateId,
         String policyHolderName,
         String policyHolderSurname,
         String coverage

@@ -22,6 +22,11 @@ public class DomainEventInMemoryRepository implements DomainEventRepository {
     }
 
     @Override
+    public List<DomainEventEntity> findAllByAggregateId(UUID aggregateId) {
+        return entities.stream().filter(e -> Objects.equals(e.getAggregateId(), aggregateId)).toList();
+    }
+
+    @Override
     public void deleteAll() {
         entities.clear();
     }

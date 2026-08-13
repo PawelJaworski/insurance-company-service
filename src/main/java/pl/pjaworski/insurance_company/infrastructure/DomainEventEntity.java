@@ -8,6 +8,8 @@ import pl.pjaworski.insurance_company.domain.events.DomainEventType;
 import pl.pjaworski.insurance_company.domain.events.PolicyIssuedEvent;
 import pl.pjaworski.insurance_company.eventstream.DomainEvent;
 
+import java.util.UUID;
+
 @Entity
 @Table(name = "domain_event")
 @Getter
@@ -19,6 +21,8 @@ public class DomainEventEntity {
     @Setter
     private Long id;
 
+    private UUID aggregateId;
+
     @Enumerated(EnumType.STRING)
     private DomainEventType type;
 
@@ -27,6 +31,7 @@ public class DomainEventEntity {
     private DomainEventSerdeWrapper eventJson;
 
     public DomainEventEntity(DomainEvent event) {
+        this.aggregateId = event.aggregateId();
         this.type = event.eventType();
         this.eventJson = switch (event) {
             case PolicyIssuedEvent e -> new PolicyIssuedSerdeWrapper(e);
