@@ -28,6 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>25</java.version>
+		<groovy.version>4.0.27</groovy.version>
+		<spock.version>2.4-M6-groovy-4.0</spock.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -61,6 +63,24 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>${groovy.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>${spock.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-spring</artifactId>
+			<version>${spock.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -104,6 +124,43 @@
 								</path>
 							</annotationProcessorPaths>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/Test*.class</include>
+						<include>**/*Test.class</include>
+						<include>**/*Tests.class</include>
+						<include>**/*TestCase.class</include>
+						<include>**/*Specification.class</include>
+						<include>**/*Spec.class</include>
+					</includes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compileTests</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>
