@@ -1,7 +1,5 @@
 package pl.pjaworski.insurance_company.eventstream;
 
-import pl.pjaworski.insurance_company.domain.events.PolicyIssued;
-
 import java.util.Collection;
 
 public interface StateProjector<S> {
@@ -10,12 +8,6 @@ public interface StateProjector<S> {
     }
 
     private S apply(S state, DomainEvent event) {
-        return switch (event.eventType()) {
-            case POLICY_ISSUED -> apply(state, (PolicyIssued) event);
-        };
-    }
-
-    default S apply(S state, PolicyIssued event) {
         return state;
     }
 }
