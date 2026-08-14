@@ -29,19 +29,6 @@ what's in `src/` — check before extending patterns.
   starter, `spring-boot-starter-webmvc`.
 - Base package: `pl.pjaworski.insurance_company`.
 
-## Domain model source of truth
-Event modeling lives in `event-modelling/*.md` (`commands.md`, `events.md`,
-`readmodels.md`) and is the authoritative business/domain model — currently
-defines one flow: `accept-policy` command -> `policy-accepted` event ->
-`policy-document` read model. `event-modelling/eventmodel.html` is a generated
-diagram from these files (see the `event-modelling` skill/plugin under
-`.opencode`, which is a symlink to a sibling `coding-agents` repo).
-When implementing domain logic, keep code, event-modelling docs, and
-ubiquitous language in sync — don't invent fields/events not present in these
-files without flagging it.
-Business definitions: docs/business-definitions.html
-Business rules: docs/business-rules.html
-
 ## Subagents
 `.opencode` (symlinked to `../coding-agents`) defines an `architect` subagent
 that owns domain modeling/API-contract decisions and enforces model/doc
