@@ -1,5 +1,7 @@
 package pl.pjaworski.insurance_company.eventstream;
 
+import java.util.UUID;
+
 public interface CommandHandler<T> {
-    Long handle(T cmd);
+    UUID handle(T cmd);
 }
