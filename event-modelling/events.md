@@ -4,6 +4,7 @@
 Name: Policy Issued
 Subprocess: Sales
 id:Policy
+* [policy number]
 * policy holder name
 * policy holder surname
 * coverage

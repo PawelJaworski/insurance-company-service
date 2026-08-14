@@ -7,4 +7,4 @@ id:Policy
 * policy holder name
 * policy holder surname
 * coverage
-* [policy number]
+* policy number
