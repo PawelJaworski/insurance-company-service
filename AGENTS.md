@@ -14,6 +14,14 @@ what's in `src/` — check before extending patterns.
 - Test: `mvn test` (runs a full `@SpringBootTest`, boots Spring context + H2
   in-memory DB — expect Hibernate/Hikari log noise, that's normal)
 - No lint/format/codegen tooling configured.
+- **Known false-positive LSP noise**: the `jdtls` language server does not
+  understand Lombok annotation processing in this project, so it routinely
+  reports bogus diagnostics on Lombok-annotated classes — e.g. `getId()`/
+  `getAggregateId()`/`setId()` "undefined" on `@Getter`/`@Setter` classes, or
+  "blank final field may not have been initialized" on
+  `@RequiredArgsConstructor` classes. These are stale/incorrect; do not act on
+  them. Treat `mvn compile` / `mvn test-compile` / `mvn test` as the
+  authoritative source of truth for whether code actually compiles/passes.
 
 ## Stack
 - Java 25, Spring Boot 4.1.0 (parent BOM), Maven, Lombok.
