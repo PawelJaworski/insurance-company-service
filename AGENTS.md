@@ -1,5 +1,16 @@
 # AGENTS.md
 
+## Paths
+All configurable file/directory paths used by skills and agents. Skills and
+agents reference these instead of hardcoding paths — keep this section as the
+single source of truth. Individual files within each directory are referenced
+by their standard filenames (e.g. `commands.md` inside `eventModel`).
+
+| Key | Default | Used by |
+|-----|---------|---------|
+| `docs` | `../docs` | business-rules-and-definitions, event-modelling, architect, backend-development, development-team |
+| `eventModel` | `{docs}` | event-modelling, architect, development-team |
+
 ## Project state
 Early-stage skeleton. Spring Boot app with almost no domain code yet
 (`InsuranceCompanyApplication`, an empty `CommandHandler<T>` interface, one
