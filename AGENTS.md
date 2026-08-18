@@ -6,10 +6,13 @@ agents reference these instead of hardcoding paths — keep this section as the
 single source of truth. Individual files within each directory are referenced
 by their standard filenames (e.g. `commands.md` inside `eventModel`).
 
-| Key | Default | Used by |
-|-----|---------|---------|
-| `docs` | `../docs` | business-rules-and-definitions, event-modelling, architect, backend-development, development-team |
-| `eventModel` | `{docs}` | event-modelling, architect, development-team |
+| Key | Always use location | Used by |
+|-----|---------------------|---------|
+| `docs` | `../docs`           | business-rules-and-definitions, event-modelling, architect, backend-development, development-team |
+| `eventModel` | `{docs}`            | event-modelling, architect, development-team |
+
+**Important:** `../` means one directory level **outside** this workspace
+(the parent directory).
 
 ## Project state
 Early-stage skeleton. Spring Boot app with almost no domain code yet
