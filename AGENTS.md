@@ -1,24 +1,34 @@
 # AGENTS.md
 
-## Paths
+## Paths **Important:**
+ALWAYS apply this for the skills which need docs or eventModel directories.
 All configurable file/directory paths used by skills and agents. Skills and
-agents reference these instead of hardcoding paths — keep this section as the
+agents mentioned in the table below ALWAYS reference these instead of hardcoding paths — keep this section as the
 single source of truth. Individual files within each directory are referenced
 by their standard filenames (e.g. `commands.md` inside `eventModel`).
 
-| Key | Always use location | Used by |
-|-----|---------------------|---------|
-| `docs` | `../docs`           | business-rules-and-definitions, event-modelling, architect, backend-development, development-team |
-| `eventModel` | `{docs}`            | event-modelling, architect, development-team |
-
-**Important:** `../` means one directory level **outside** this workspace
-(the parent directory).
+| Key | Always use relative path | Always used by                                                                                    |
+|-----|--------------------------|---------------------------------------------------------------------------------------------------|
+| `docs` | `../docs`                | business-rules-and-definitions, event-modelling, architect, backend-development, development-team |
+| `eventModel` | `{docs}`                 | event-modelling, architect, development-team                                                      |
 
 ## Project state
 Early-stage skeleton. Spring Boot app with almost no domain code yet
 (`InsuranceCompanyApplication`, an empty `CommandHandler<T>` interface, one
 placeholder `contextLoads` test). Don't assume architecture exists beyond
 what's in `src/` — check before extending patterns.
+
+## Efficient exploration patterns
+- **Use glob for directory traversal**: Instead of reading directories one level at a time, use patterns like:
+  - `src/main/java/**/*.java` — all Java source files
+  - `src/main/java/pl/pjaworski/insurance_company/*/` — top-level packages
+  - `src/main/java/pl/pjaworski/insurance_company/**/` — all packages recursively
+- **Read docs in parallel**: When starting a task, read all relevant docs in one batch:
+  - `commands.md`, `events.md`, `readmodels.md`, `uis.md` (event modeling)
+  - `business-definitions-raw.md` (business definitions)
+- **Check existing code minimally**: Only read files directly related to the change. Don't explore empty directories or read every existing class.
+- **Batch writes**: Write all related files in parallel batches instead of one at a time.
+- **Verify once**: Run `mvn compile` and `mvn test` only after all files are written.
 
 ## Build / test
 - `./mvnw` is **broken**: `.mvn/wrapper/` is missing from the repo, so the
