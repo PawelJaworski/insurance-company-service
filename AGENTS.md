@@ -9,7 +9,7 @@ by their standard filenames (e.g. `commands.md` inside `eventModel`).
 
 | Key | Always use relative path | Always used by                                                                                    |
 |-----|--------------------------|---------------------------------------------------------------------------------------------------|
-| `docs` | `cd ../docs`             | business-rules-and-definitions, event-modelling, architect, backend-development, development-team |
+| `docs` | `cd ../docs`             | business-rules-and-definitions, event-modelling, architect, backend-development, backend-plan, backend-generate, development-team |
 | `eventModel` | `{docs}`                 | event-modelling, architect, development-team                                                      |
 
 ## Project state
