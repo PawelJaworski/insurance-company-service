@@ -31,11 +31,11 @@ what's in `src/` — check before extending patterns.
 - **Verify once**: Run `mvn compile` and `mvn test` only after all files are written.
 
 ## Build / test
-- `./mvnw` is **broken**: `.mvn/wrapper/` is missing from the repo, so the
-  wrapper fails with `cannot read distributionUrl property`. Use the system
-  `mvn` instead (Maven 3.9.x, Java 25 confirmed working).
-- Build: `mvn compile`
-- Test: `mvn test` (runs a full `@SpringBootTest`, boots Spring context + H2
+- `./mvnw` works (`.mvn/wrapper/maven-wrapper.properties` present, pins Maven
+  3.9.15 with a SHA-256 checksum). Both `./mvnw` and the system `mvn` are valid
+  (Java 25 confirmed working).
+- Build: `./mvnw compile` (or `mvn compile`)
+- Test: `./mvnw test` (runs a full `@SpringBootTest`, boots Spring context + H2
   in-memory DB — expect Hibernate/Hikari log noise, that's normal)
 - No lint/format/codegen tooling configured.
 - **Known false-positive LSP noise**: the `jdtls` language server does not
