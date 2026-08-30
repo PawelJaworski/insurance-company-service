@@ -1,0 +1,6 @@
+{
+  "basePackage": "pl.pjaworski.insurance_company",
+  "modelDir": "../docs",
+  "mainSourceRoot": "src/main/java",
+  "testSourceRoot": "src/test/java"
+}
