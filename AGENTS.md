@@ -51,12 +51,6 @@ projectors or repositories in a test.
 A missing field or unknown event fails the generator loudly with a model error —
 fix the model, don't work around it in code.
 
-## Project state
-Spring Boot event-sourced app. Slices (`issuepolicy`, `createproposal`,
-`policydocument`, `proposaldetails`) are generated from the event model; shared
-infrastructure (`eventstream`, `infrastructure`) is hand-written except
-`StateProjector`, `DomainEventType`, `DomainEventSerde*` which are generated.
-
 ## Efficient exploration patterns
 - **Use glob for directory traversal**: Instead of reading directories one level at a time, use patterns like:
   - `src/main/java/**/*.java` — all Java source files
