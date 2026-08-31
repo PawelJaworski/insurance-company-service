@@ -30,6 +30,9 @@
 		<java.version>25</java.version>
 		<groovy.version>4.0.27</groovy.version>
 		<spock.version>2.4-M6-groovy-4.0</spock.version>
+		<springdoc.version>3.1.0</springdoc.version>
+		<springdoc-maven-plugin.version>1.5</springdoc-maven-plugin.version>
+		<openapi.export.port>8099</openapi.export.port>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -47,7 +50,7 @@
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>3.1.0</version>
+			<version>${springdoc.version}</version>
 		</dependency>
 
 		<dependency>
@@ -95,6 +98,44 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>pre-integration-test</id>
+						<goals>
+							<goal>start</goal>
+						</goals>
+						<configuration>
+							<arguments>
+								<argument>--server.port=${openapi.export.port}</argument>
+							</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>post-integration-test</id>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.springdoc</groupId>
+				<artifactId>springdoc-openapi-maven-plugin</artifactId>
+				<version>${springdoc-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>generate-openapi-contract</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<apiDocsUrl>http://localhost:${openapi.export.port}/v3/api-docs</apiDocsUrl>
+					<outputDir>${project.basedir}/api</outputDir>
+					<outputFileName>openapi.json</outputFileName>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

@@ -25,6 +25,18 @@ node .opencode/skills/backend-development/scripts/codegen --json     # print the
 Source of truth: `../docs/{commands,events,readmodels}.md` +
 `business-definitions-raw.md`.
 
+**API contract.** After every codegen run that touched a command or read model, export
+the OpenAPI contract the frontend consumes:
+
+```
+mvn verify            # boots the app on ${openapi.export.port}, writes api/openapi.json
+```
+
+It is scraped from the running controllers (`/v3/api-docs`), so it is stale the moment the
+model changes. The generator does not produce it — `scripts/codegen` is a pure
+model -> source transform and knows nothing about Maven or Spring. **Never commit
+`api/openapi.json`;** regenerate it, say that it changed, and leave it in the working tree.
+
 The generator is **not in this repo** — it lives in the reusable skill
 `.opencode/skills/backend-development/scripts/codegen` so the same pipeline serves
 every domain. The only project-specific input is `codegen.config.json` at the root.
